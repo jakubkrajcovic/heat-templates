@@ -3,7 +3,11 @@
         {
             "id": 1,
             "name": "2-node GlusterFS with 2 clients",
-            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/glusterfs.template"
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs.template"
         }
+        {
+            "id": 2,
+            "name": "2-node GlusterFS with 2 clients - test",
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs-test.template"
         ]
 }
