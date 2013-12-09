@@ -49,8 +49,11 @@ resources:
           key_name: { get_param: key-name }
           image: { get_param: image }
           flavor: { get_param: flavor }
-          user_data: |
-            apt-get install -y build-essential
+          user_data:
+            str_replace:
+              template: |
+                #!/bin/bash -v
+                apt-get install -y build-essential
 
 
 outputs:
