@@ -51,3 +51,26 @@ resources:
           flavor: { get_param: flavor }
           user_data: |
             apt-get install -y build-essential
+
+
+outputs:
+  ssh:
+    value: 
+      str_replace:
+      template: ssh root@%host%
+      params:
+        "%host%":
+          get_attr:
+          - gluster_servers.[0]
+          - PublicIp
+    description: ssh to the redis host
+  verify:
+    value:
+      str_replace:
+        template: redis-cli -h %host% ping
+        params:
+          "%host%":
+          get_attr:
+          - gluster_servers.[0]
+          - PublicIp
+    description: verify the redis server via redis-cli
