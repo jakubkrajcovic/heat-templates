@@ -86,14 +86,15 @@ parameters:
 
 resources:
 
-#  gluster_bricks:
-#    type: OS::Heat::ResourceGroup
-#    properties:
-#      count: 2
-#      resource_def:
-#        type: OS::Cinder::Volume
-#        properties:
-#          size: { get_param: volume_size }
+  gluster_bricks:
+    type: OS::Heat::ResourceGroup
+    properties:
+      count: 2
+      resource_def:
+        #type: OS::Cinder::Volume
+        type: Rackspace::Cloud::Volume
+        properties:
+          size: { get_param: volume_size }
 
   gluster_servers:
     type: OS::Heat::ResourceGroup
