@@ -15,7 +15,7 @@ parameters:
     default: Ubuntu 12.04 LTS (Precise Pangolin)
     constraints:
     # only tested on Ubuntu images so far
-      - allowed_values:
+    - allowed_values:
       - Ubuntu 10.04 LTS (Lucid Lynx)
       - Ubuntu 12.04 LTS (Precise Pangolin)
       - Ubuntu 12.10 (Quantal Quetzal)
