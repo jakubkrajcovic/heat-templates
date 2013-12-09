@@ -26,7 +26,7 @@ parameters:
     description: Size of the volume to be created.
     default: 100
     constraints:
-      - range: { min: 100, max: 1024 }
+    - range: { min: 100, max: 1024 }
       description: must be between 100 and 1024 Gb.
 
   glusterserver_flavor:
@@ -83,8 +83,10 @@ resources:
           key_name: { get_param: key_name }
           image: { get_param: image }
           flavor: { get_param: glusterserver_flavor }
-          user_data: |
-            apt-get install -y build-essential
+          user_data:
+            str_replace:
+              template: |
+                apt-get install -y build-essential
             
   gluster_bricks:
     type: OS::Heat::ResourceGroup
@@ -118,8 +120,10 @@ resources:
           key_name: { get_param: key_name }
           image: { get_param: image }
           flavor: { get_param: glusterclient_flavor }
-          user_data: |
-            apt-get install -y build-essential
+          user_data:
+            str_replace:
+              template: |
+                apt-get install -y build-essential
       
 outputs:
   ssh:
