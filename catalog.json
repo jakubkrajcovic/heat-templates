@@ -9,5 +9,6 @@
             "id": 2,
             "name": "2-node GlusterFS with 2 clients - test",
             "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs-test.template"
+        }
         ]
 }
