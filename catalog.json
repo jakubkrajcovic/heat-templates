@@ -1,0 +1,9 @@
+{
+    "templates": [
+        {
+            "id": 1,
+            "name": "2-node GlusterFS with 2 clients",
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/glusterfs.template"
+        }
+        ]
+}
