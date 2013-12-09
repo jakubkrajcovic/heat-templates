@@ -120,8 +120,8 @@ resources:
               params:
                 "%glustersrv01_ip%": { get_attr: [ gluster_servers.[0], PublicIp ] }
                 "%glustersrv01_ip%": { get_attr: [ gluster_servers.[1], PublicIp ] }
-                "%glusterclient01_ip%": { get_attr: [gluster_clients.[0], PublicIP ] }
-                "%glusterclient02_ip%": { get_attr: [gluster_clients.[1], PublicIP ] } 
+                "%glusterclient01_ip%": { get_attr: [ gluster_clients.[0], PublicIP ] }
+                "%glusterclient02_ip%": { get_attr: [ gluster_clients.[1], PublicIP ] } 
             
 #  volume_attachment_server1_brick1:
 #    type: OS::Cinder::VolumeAttachment
@@ -163,8 +163,8 @@ resources:
               params:
                 "%glustersrv01_ip%": { get_attr: [ gluster_servers.[0], PublicIp ] }
                 "%glustersrv01_ip%": { get_attr: [ gluster_servers.[1], PublicIp ] }
-                "%glusterclient01_ip%": { get_attr: [gluster_clients.[0], PublicIP ] }
-                "%glusterclient02_ip%": { get_attr: [gluster_clients.[1], PublicIP ] } 
+                "%glusterclient01_ip%": { get_attr: [ gluster_clients.[0], PublicIP ] }
+                "%glusterclient02_ip%": { get_attr: [ gluster_clients.[1], PublicIP ] } 
 
 outputs:
   ssh:
