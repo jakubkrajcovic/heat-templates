@@ -91,8 +91,7 @@ resources:
     properties:
       count: 2
       resource_def:
-        #type: OS::Cinder::Volume
-        type: Rackspace::Cloud::Volume
+        type: OS::Cinder::Volume
         properties:
           size: { get_param: volume_size }
 
