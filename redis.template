@@ -32,6 +32,7 @@ parameters:
       - 8GB Standard Instance
       - 15GB Standard Instance
       - 30GB Standard Instance 
+      - 2 GB Performance
       description: must be a valid Rackspace Cloud Server flavor.
 
 resources:
