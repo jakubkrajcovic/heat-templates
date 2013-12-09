@@ -93,7 +93,7 @@ resources:
       resource_def:
         type: Rackspace::Cloud::Server
         properties:
-          key_name: { get_param: key_name }
+          key_name: { get_param: key-name }
           image: { get_param: image }
           flavor: { get_param: glusterserver_flavor }
           user_data:
@@ -130,7 +130,7 @@ resources:
       resource_def:
         type: Rackspace::Cloud::Server
         properties:
-          key_name: { get_param: key_name }
+          key_name: { get_param: key-name }
           image: { get_param: image }
           flavor: { get_param: glusterclient_flavor }
           user_data:
