@@ -39,6 +39,7 @@ parameters:
       description: must be a valid Rackspace Cloud Server flavor.
 
 resources:
+
   gluster_servers:
     type: OS::Heat::ResourceGroup
     properties: 
@@ -60,20 +61,10 @@ outputs:
   ssh:
     value: 
       str_replace:
-      template: ssh root@%host%
-      params:
-        "%host%":
-          get_attr:
-          - gluster_servers.[0]
-          - PublicIp
-    description: ssh to the redis host
-  verify:
-    value:
-      str_replace:
-        template: redis-cli -h %host% ping
+        template: ssh root@%host%
         params:
           "%host%":
-          get_attr:
-          - gluster_servers.[0]
-          - PublicIp
-    description: verify the redis server via redis-cli
+            get_attr:
+            - gluster_servers.[0]
+            - PublicIp
+    description: ssh to the redis host
