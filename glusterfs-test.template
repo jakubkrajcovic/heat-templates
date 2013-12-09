@@ -1,7 +1,7 @@
 heat_template_version: 2013-05-23
 
 description: |
-  Simple template to deploy Redis on a cloud server
+  Simple template to deploy Gluster on a cloud server
 
 parameters:
   
@@ -27,7 +27,7 @@ parameters:
     type: String
     default: 1GB Standard Instance
     constraints:
-      - allowed_values:
+    - allowed_values:
       - 512MB Standard Instance
       - 1GB Standard Instance
       - 2GB Standard Instance
