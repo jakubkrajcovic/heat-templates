@@ -117,8 +117,8 @@ resources:
   volume_attachment_server1_brick1:
     type: OS::Cinder::VolumeAttachment
     properties:
-      volume_id: { get_resource: gluster_bricks.[0] }
-      instance_uuid: { get_resource: gluster_servers.[0] }
+      volume_id: { get_resource: gluster_bricks[0] }
+      instance_uuid: { get_resource: gluster_servers[0] }
       mountpoint: /dev/xvdc
 
 #  volume_attachment_server2_brick2:
