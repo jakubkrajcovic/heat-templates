@@ -19,7 +19,7 @@ parameters:
       - Ubuntu 12.04 LTS (Precise Pangolin)
       - Ubuntu 12.10 (Quantal Quetzal)
       - Ubuntu 13.04 (Raring Ringtail)
-    description: must be a valid Ubuntu image id
+      description: must be a valid Ubuntu image id
 
   volume_size:
     type: Number
