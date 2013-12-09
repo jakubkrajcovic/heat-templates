@@ -1,10 +1,9 @@
-heat_template_version: 2013-12-06
+heat_template_version: 2013-05-23
 
 description: |
   Simple template to deploy a basic GlusterFS environment with 2 bricks and 2 clients
 
 parameters:
-  
   key-name:
     type: String
     description: Name of a nova ssh keypair to use for server access
@@ -130,7 +129,6 @@ outputs:
         params:
           "%host%":
           get_attr:
-          - gluster_clients
           - PublicIp
     description: ssh to the gluster hosts
     
