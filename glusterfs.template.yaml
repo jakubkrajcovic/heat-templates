@@ -4,7 +4,7 @@ description: |
   Simple template to deploy a basic GlusterFS environment with 2 bricks and 2 clients
 
 parameters:
-  key-name:
+  key_name:
     type: String
     description: Name of a nova ssh keypair to use for server access
     
@@ -80,7 +80,7 @@ resources:
       resource_def:
         type: Rackspace::Cloud::Server
         properties:
-          key_name: { get_param: key-name }
+          key_name: { get_param: key_name }
           image: { get_param: image }
           flavor: { get_param: glusterserver_flavor }
           user_data: |
@@ -115,7 +115,7 @@ resources:
       resource_def:
         type: Rackspace::Cloud::Server
         properties:
-          key_name: { get_param: key-name }
+          key_name: { get_param: key_name }
           image: { get_param: image }
           flavor: { get_param: glusterclient_flavor }
           user_data: |
