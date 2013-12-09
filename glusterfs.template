@@ -4,9 +4,20 @@ description: |
   Simple template to deploy a basic GlusterFS environment with 2 bricks and 2 clients
 
 parameters:
-  key_name:
+  key-name:
     type: String
+    required: true
     description: Name of a nova ssh keypair to use for server access
+
+  gluster_server_name:
+    description: Base name for the GlusterFS servers
+    type: String
+    default: gluster-server
+
+  gluster_client_name:
+    description: Base name for the GlusterFS clients
+    type: String
+    default: gluster-client
     
   image:
     type: String
@@ -26,7 +37,9 @@ parameters:
     description: Size of the volume to be created.
     default: 100
     constraints:
-    - range: { min: 100, max: 1024 }
+    - range:
+        min: 100
+        max: 1024
       description: must be between 100 and 1024 Gb.
 
   glusterserver_flavor:
@@ -107,7 +120,7 @@ resources:
     type: OS::Cinder::VolumeAttachment
     properties:
       volume_id: { get_resource: gluster_bricks.[1] }
-      instance_uuid: { get_resource: gluster_servers[1] }
+      instance_uuid: { get_resource: gluster_servers.[1] }
       mountpoint: /dev/xvdc
       
   gluster_clients:
