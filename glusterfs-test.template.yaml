@@ -65,6 +65,5 @@ outputs:
         params:
           "%host%":
             get_attr:
-            - gluster_servers.[0]
             - PublicIp
     description: ssh to the redis host
