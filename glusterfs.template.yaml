@@ -114,12 +114,12 @@ resources:
                 cat >>/etc/hosts<<EOF
                 EOF
             
-#  volume_attachment_server1_brick1:
-#    type: OS::Cinder::VolumeAttachment
-#    properties:
-#      volume_id: { get_resource: gluster_bricks.[0].volume_id }
-#      instance_uuid: { get_resource: gluster_servers.[0].reservation_id }
-#      mountpoint: /dev/xvdc
+  volume_attachment_server1_brick1:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_resource: [ gluster_bricks.[0], volume_id ] }
+      instance_uuid: { get_resource: [ gluster_servers.[0], reservation_id ] }
+      mountpoint: /dev/xvdc
 
 #  volume_attachment_server2_brick2:
 #    type: OS::Cinder::VolumeAttachment
