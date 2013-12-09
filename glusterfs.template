@@ -63,7 +63,7 @@ parameters:
       - 120 GB Performance
       description: must be a valid Rackspace Cloud Server flavor.
 
- glusterclient_flavor:
+  glusterclient_flavor:
     description: Client flavor id to use
     type: String
     default: 4GB Standard Instance
