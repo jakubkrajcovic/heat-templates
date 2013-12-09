@@ -112,16 +112,7 @@ resources:
                 chkconfig glusterd on
                 service iptables stop
                 cat >>/etc/hosts<<EOF
-                %glustersrv01_ip% gluster-server-01
-                %glustersrv02_ip% gluster-server-02
-                %glusterclient01_ip% gluster-client-01
-                %glusterclient02_ip% glucster-client-02
                 EOF
-              params:
-                "%glustersrv01_ip%": { get_attr: [ gluster_servers.[0], PublicIp ] }
-                "%glustersrv01_ip%": { get_attr: [ gluster_servers.[1], PublicIp ] }
-                "%glusterclient01_ip%": { get_attr: [ gluster_clients.[0], PublicIP ] }
-                "%glusterclient02_ip%": { get_attr: [ gluster_clients.[1], PublicIP ] } 
             
 #  volume_attachment_server1_brick1:
 #    type: OS::Cinder::VolumeAttachment
@@ -155,16 +146,7 @@ resources:
                 modprobe fuse
                 mkdir -p /glusterfs/gv0
                 cat >>/etc/hosts<<EOF
-                %glustersrv01_ip% gluster-server-01
-                %glustersrv02_ip% gluster-server-02
-                %glusterclient01_ip% gluster-client-01
-                %glusterclient02_ip% glucster-client-02
                 EOF
-              params:
-                "%glustersrv01_ip%": { get_attr: [ gluster_servers.[0], PublicIp ] }
-                "%glustersrv01_ip%": { get_attr: [ gluster_servers.[1], PublicIp ] }
-                "%glusterclient01_ip%": { get_attr: [ gluster_clients.[0], PublicIP ] }
-                "%glusterclient02_ip%": { get_attr: [ gluster_clients.[1], PublicIP ] } 
 
 outputs:
   ssh:
