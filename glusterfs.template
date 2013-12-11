@@ -156,6 +156,7 @@ outputs:
         params:
           "%host%":
           get_attr:
+          - gluster_servers.0
           - PublicIp
     description: ssh to the gluster hosts
     
@@ -166,5 +167,6 @@ outputs:
         params:
           "%host%":
           get_attr:
+          - gluster_servers.0    
           - PublicIp
     description: ssh to gluster hosts
