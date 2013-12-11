@@ -117,16 +117,16 @@ resources:
   volume_attachment_server1_brick1:
     type: OS::Cinder::VolumeAttachment
     properties:
-      volume_id: { get_resource: gluster_bricks.0 }
-      instance_uuid: { get_resource: gluster_servers.0 }
+      volume_id: { get_attr: gluster_bricks.0.volume_id }
+      instance_uuid: { get_attr: gluster_servers.0.reservation_id }
       mountpoint: /dev/xvdc
 
-#  volume_attachment_server2_brick2:
-#    type: OS::Cinder::VolumeAttachment
-#    properties:
-#      volume_id: { get_resource: gluster_bricks.[1].volume_id }
-#      instance_uuid: { get_resource: gluster_servers.[1].reservation_id }
-#      mountpoint: /dev/xvdc
+  volume_attachment_server2_brick2:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_attr: gluster_bricks.1.volume_id }
+      instance_uuid: { get_attr: gluster_servers.1.reservation_id }
+      mountpoint: /dev/xvdc
       
   gluster_clients:
     type: OS::Heat::ResourceGroup
