@@ -169,11 +169,20 @@ parameters:
 # START RESOURCES SECTION ######################################
 resources:
 
+# dummy server to trick load balancers into building:
+  dummy_serve:
+    type: OS::Nova::Server
+    properties:
+      image: { get_param: image }
+      flavor: { get_param: web_server_flavor }
+      key_name: { get_param: key-name }
+ 
+
 # LOAD BALANCER DEFINITIONS #
   ext_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: []
+      nodes: [{get_resource: dummy_server}]
       protocol: TCP
       port: 80
       virtualIps:
@@ -182,7 +191,7 @@ resources:
   int_search_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: []
+      nodes: [{get_resource: dummy_server}]
       protocol: TCP
       port: 8983
       virtualIps:
@@ -191,7 +200,7 @@ resources:
   int_app_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: []
+      nodes: [{get_resource: dummy_server}]
       protocol: TCP
       port: 80
       virtualIps:
