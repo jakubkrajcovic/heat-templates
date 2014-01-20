@@ -251,7 +251,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: { get_resource: as_group_web_servers }
-      name: increment_01
+      name: web_servers_increment_01
       change: 1
       cooldown: 59
       type: webhook
@@ -260,7 +260,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: {get_resource: as_group_web_servers }
-      name: decrement_01
+      name: web_servers_decrement_01
       change: -1
       cooldown: 59
       type: webhook
@@ -322,7 +322,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: { get_resource: as_group_app_servers }
-      name: increment_01
+      name: app_servers_increment_01
       change: 1
       cooldown: 59
       type: webhook
@@ -331,7 +331,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: {get_resource: as_group_app_servers }
-      name: decrement_01
+      name: app_servers_decrement_01
       change: -1
       cooldown: 59
       type: webhook
@@ -395,7 +395,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: { get_resource: as_group_search_servers }
-      name: increment_01
+      name: search_servers_increment_01
       change: 1
       cooldown: 59
       type: webhook
@@ -404,7 +404,7 @@ resources:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
       group: {get_resource: as_group_search_servers }
-      name: decrement_01
+      name: search_servers_decrement_01
       change: -1
       cooldown: 59
       type: webhook
