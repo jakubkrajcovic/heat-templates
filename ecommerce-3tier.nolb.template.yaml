@@ -228,7 +228,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: 15473
+              loadBalancerId: "15473"
               port: 80
 
   as_group_web_servers_inc_policy_01:
@@ -296,7 +296,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: 15475
+              loadBalancerId: "15475"
               port: 80
 
   as_group_app_servers_inc_policy_01:
@@ -365,7 +365,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: 15477
+              loadBalancerId: "15477"
               port: 8983
 
   as_group_search_servers_inc_policy_01:
