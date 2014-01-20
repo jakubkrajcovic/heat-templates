@@ -34,7 +34,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z0-9]*'
         description: db_password must contain only alphanumeric characters
   db_root_password:
-    type: string
+    type: String
     description: Root password for MySQL
     default: admin
     hidden: false
