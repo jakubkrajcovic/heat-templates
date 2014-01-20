@@ -175,9 +175,9 @@ resources:
     properties:
       count: 1
       resource_def: 
-        type: Rackspace::Cloud::Server
+        type: OS::Nova::Server
         properties:
-          name: dummy_server
+          name: { get_param: web_server_name } 
           image: { get_param: image }
           flavor: { get_param: web_server_flavor }
           key_name: { get_param: key-name }
