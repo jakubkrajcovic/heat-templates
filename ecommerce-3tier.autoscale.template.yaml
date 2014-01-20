@@ -188,9 +188,9 @@ resources:
             config_drive: true
             networks:
               - 
-                uuid: "11111111-1111-1111-1111-111111111111"
+                uuid: 11111111-1111-1111-1111-111111111111
               - 
-                uuid: "00000000-0000-0000-0000-000000000000" 
+                uuid: 00000000-0000-0000-0000-000000000000
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -264,9 +264,9 @@ resources:
             config_drive: true
             networks:
               - 
-                uuid: "11111111-1111-1111-1111-111111111111"
+                uuid: 11111111-1111-1111-1111-111111111111
               - 
-                uuid: "00000000-0000-0000-0000-000000000000" 
+                uuid: 00000000-0000-0000-0000-000000000000
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -342,9 +342,9 @@ resources:
             flavorRef: { get_param: search_server_flavor }
             networks:
               - 
-                uuid: "11111111-1111-1111-1111-111111111111"
+                uuid: 11111111-1111-1111-1111-111111111111
               - 
-                uuid: "00000000-0000-0000-0000-000000000000" 
+                uuid: 00000000-0000-0000-0000-000000000000
             metadata: 
               hotness_factor: "100"
             user_data:
