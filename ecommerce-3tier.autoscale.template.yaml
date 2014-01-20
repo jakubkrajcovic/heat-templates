@@ -186,7 +186,7 @@ resources:
             imageRef: { get_param: image }
             flavorRef: { get_param: web_server_flavor }
             config_drive: true
-            networks: [ { uuid: "11111111-1111-1111-1111-111111111111" }, { uuid: "00000000-0000-0000-0000-000000000000" } ]
+            networks: [ { uuid: "00000000-0000-0000-0000-000000000000" } ]
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -258,7 +258,7 @@ resources:
             imageRef: { get_param: image }
             flavorRef: { get_param: app_server_flavor }
             config_drive: true
-            networks: [ { uuid: "11111111-1111-1111-1111-111111111111" }, { uuid: "00000000-0000-0000-0000-000000000000" } ]
+            networks: [ { uuid: "00000000-0000-0000-0000-000000000000" } ]
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -333,7 +333,7 @@ resources:
             imageRef: { get_param: image }
             flavorRef: { get_param: search_server_flavor }
             config_drive: true
-            networks: [ { uuid: "11111111-1111-1111-1111-111111111111" }, { uuid: "00000000-0000-0000-0000-000000000000" } ]
+            networks: [ { uuid: "00000000-0000-0000-0000-000000000000" } ]
             metadata: 
               hotness_factor: "100"
             user_data:
