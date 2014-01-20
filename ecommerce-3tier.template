@@ -177,7 +177,7 @@ resources:
       resource_def: 
         type: Rackspace::Cloud::Server
         properties:
-          name: "dummy_server"
+          name: dummy_server
           image: { get_param: image }
           flavor: { get_param: web_server_flavor }
           key_name: { get_param: key-name }
