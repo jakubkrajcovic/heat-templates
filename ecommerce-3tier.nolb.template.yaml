@@ -44,6 +44,15 @@ parameters:
 #      - allowed_pattern: '[a-zA-Z0-9]*'
 #        description: db_password must contain only alphanumeric characters
 
+  imageID:
+    type: String
+    hidden: true
+    default: bced783b-31d2-4637-b820-fa02522c518b
+  flavorID:
+    type: String
+    hidden: true 
+    default: 4
+
   key-name:
     type: String
     required: true
@@ -72,22 +81,20 @@ parameters:
   image:
     type: String
     description: Server image id to use
-    default: bced783b-31d2-4637-b820-fa02522c518b
+    default: Scientific Linux 6.4
     constraints:
     - allowed_values:
-# Centos 6.4, RHEL 6.4, SL 6.4
-      - f70ed7c7-b42e-4d77-83d8-40fa29825b85
-      - c6e2fed0-75bf-420d-a744-7cfc75a1889e
-      - bced783b-31d2-4637-b820-fa02522c518b
+      - CentOS 6.4
+      - Red Hat Enterprise Linux 6.4
+      - Scientific Linux 6.4
       description: USERDATA is made to work with Red Hat flavors and clones
 
   app_server_flavor:
     description: Server flavor for the Application servers
     type: String
-    default: 6
+    default: 8GB Standard Instance
     constraints:
     - allowed_values:
-      - 6
       - 2GB Standard Instance
       - 4GB Standard Instance
       - 8GB Standard Instance
@@ -106,10 +113,9 @@ parameters:
   web_server_flavor:
     description: Server flavor for the Web servers
     type: String
-    default: 5
+    default: 4GB Standard Instance
     constraints:
     - allowed_values:
-      - 5
       - 2GB Standard Instance
       - 4GB Standard Instance
       - 8GB Standard Instance
@@ -128,10 +134,9 @@ parameters:
   search_server_flavor:
     description: Server flavor for the Search servers
     type: String
-    default: 4
+    default: 2GB Standard Instance
     constraints:
     - allowed_values:
-      - 4
       - 2GB Standard Instance
       - 4GB Standard Instance
       - 8GB Standard Instance
@@ -150,10 +155,9 @@ parameters:
   db_server_flavor:
     description: Server flavor for the Database servers
     type: String
-    default: 7
+    default: 15GB Standard Instance
     constraints:
     - allowed_values:
-      - 7
       - 2GB Standard Instance
       - 4GB Standard Instance
       - 8GB Standard Instance
@@ -191,8 +195,8 @@ resources:
           server: 
             name: { get_param: web_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: image }
-            flavorRef: { get_param: web_server_flavor }
+            imageRef: { get_param: imageID }
+            flavorRef: { get_param: flavorID }
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -259,8 +263,8 @@ resources:
           server: 
             name: { get_param: app_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: image }
-            flavorRef: { get_param: app_server_flavor }
+            imageRef: { get_param: imageID }
+            flavorRef: { get_param: flavorID }
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -328,8 +332,8 @@ resources:
           server: 
             name: { get_param: search_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: image }
-            flavorRef: { get_param: search_server_flavor }
+            imageRef: { get_param: imageID }
+            flavorRef: { get_param: flavorID }
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -381,7 +385,7 @@ resources:
 
 # DB SERVERS SECTION - THERE IS NO AUTOSCALING HERE
   master_db:
-    type: OS::Nova::Server
+    type: Rackspace::Cloud::Server
     properties:
       image: { get_param: image }
       flavor: { get_param: db_server_flavor }
