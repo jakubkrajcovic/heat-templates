@@ -191,12 +191,12 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
+                  service iptables save
+                  service iptables stop
+                  chkconfig iptables off
                   yum -y install httpd
                   chkconfig httpd on
                   service httpd start
-                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
-                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_param: ext_lb }
@@ -261,13 +261,14 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
+                  service iptables save
+                  service iptables stop
+                  chkconfig iptables off
+
                   yum -y install java
                   yum -y install tomcat6 tomcat6-webapps tomcat6-admin-webapps
                   chkconfig tomcat6 on
                   service tomcat6 start
-                  iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
-                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_param: int_app_lb }
@@ -333,14 +334,14 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
+                  service iptables save
+                  service iptables stop
+                  chkconfig iptables off
+
                   yum -y install java
                   yum -y install tomcat6 tomcat6-webapps tomcat6-admin-webapps
                   chkconfig tomcat6 on
                   service tomcat6 start
-                  iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
-                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_param: int_search_lb }
@@ -393,7 +394,10 @@ resources:
         str_replace:
           template: |
             #!/bin/bash -v
-            
+            service iptables save
+            service iptables stop
+            chkconfig iptables off
+
             yum -y install mysql mysql-server
             systemctl enable mysqld.service
             systemctl start mysqld.service
