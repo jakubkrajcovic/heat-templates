@@ -237,7 +237,7 @@ resources:
   as_group_web_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: { get_resource: web-servers-as-group }
+      group: { get_resource: as_group_web_servers }
       name: increment_01
       change: 1
       cooldown: 59
@@ -246,7 +246,7 @@ resources:
   as_group_web_servers_dec_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: {get_resource: web-servers-as-group}
+      group: {get_resource: as_group_web_servers }
       name: decrement_01
       change: -1
       cooldown: 59
@@ -308,7 +308,7 @@ resources:
   as_group_app_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: { get_resource: app-servers-as-group }
+      group: { get_resource: as_group_app_servers }
       name: increment_01
       change: 1
       cooldown: 59
@@ -317,7 +317,7 @@ resources:
   as_group_app_servers_dec_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: {get_resource: app-servers-as-group}
+      group: {get_resource: as_group_app_servers }
       name: decrement_01
       change: -1
       cooldown: 59
@@ -380,7 +380,7 @@ resources:
   as_group_search_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: { get_resource: search-servers-as-group }
+      group: { get_resource: as_group_search_servers }
       name: increment_01
       change: 1
       cooldown: 59
@@ -389,7 +389,7 @@ resources:
   as_group_search_servers_dec_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
     properties:
-      group: {get_resource: search-servers-as-group}
+      group: {get_resource: as_group_search_servers }
       name: decrement_01
       change: -1
       cooldown: 59
