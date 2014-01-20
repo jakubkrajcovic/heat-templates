@@ -182,7 +182,7 @@ resources:
   ext_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: [{get_resource: dummy_server}]
+      nodes: {get_resource: dummy_server}
       protocol: TCP
       port: 80
       virtualIps:
@@ -191,7 +191,7 @@ resources:
   int_search_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: [{get_resource: dummy_server}]
+      nodes: {get_resource: dummy_server}
       protocol: TCP
       port: 8983
       virtualIps:
@@ -200,7 +200,7 @@ resources:
   int_app_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: [{get_resource: dummy_server}]
+      nodes: {get_resource: dummy_server}
       protocol: TCP
       port: 80
       virtualIps:
