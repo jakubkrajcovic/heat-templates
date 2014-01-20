@@ -27,7 +27,7 @@ parameters:
     type: String
     description: The database admin account password
     default: admin
-    hidden: false
+    hidden: true
     constraints:
       - length: { min: 1, max: 41 }
         description: db_username must be between 1 and 64 characters
@@ -85,62 +85,17 @@ parameters:
     description: Server flavor for the Application servers
     type: String
     default: 6
-#    constraints:
-#    - allowed_values:
-#      - 4
-#      - 5
-#      - 6
-#      - 7
-#      - performance1-2
-#      - performance1-4
-#      - performance1-8
-#      - performance2-15
-#      - performance2-30
-#      - performance2-60
-#      - performance2-90
-#      - performance2-120
-#      description: must be a valid Rackspace Cloud Server flavor.
 
   web_server_flavor:
     description: Server flavor for the Web servers
     type: String
     default: 5
-#    constraints:
-#    - allowed_values:
-#      - 4
-#      - 5
-#      - 6
-#      - 7
-#      - performance1-2
-#      - performance1-4
-#      - performance1-8
-#      - performance2-15
-#      - performance2-30
-#      - performance2-60
-#      - performance2-90
-#      - performance2-120
-#      description: must be a valid Rackspace Cloud Server flavor.
 
   search_server_flavor:
     description: Server flavor for the Search servers
     type: String
     default: 4
-#    constraints:
-#    - allowed_values:
-#      - 4
-#      - 5
-#      - 6
-#      - 7
-#      - performance1-2
-#      - performance1-4
-#      - performance1-8
-#      - performance2-15
-#      - performance2-30
-#      - performance2-60
-#      - performance2-90
-#      - performance2-120
-#      description: must be a valid Rackspace Cloud Server flavor.
-
+  
   db_server_flavor:
     description: Server flavor for the Database servers
     type: String
@@ -454,10 +409,10 @@ resources:
             EOF
           
           params:
-            %db_rootpassword%: "admin"
-            %db_name%: { get_param: db_name }
-            %db_user%: { get_param: db_username }
-            %db_password%: { get_param: db_password } 
+            "%db_rootpassword%": "admin"
+            "%db_name%": { get_param: db_name }
+            "%db_user%": { get_param: db_username }
+            "%db_password%": { get_param: db_password } 
 
 
 
