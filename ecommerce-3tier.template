@@ -170,12 +170,17 @@ parameters:
 resources:
 
 # dummy server to trick load balancers into building:
-  dummy_server:
-    type: OS::Nova::Server
+  dummy_servers:
+    type: OS::Heat::ResourceGroup
     properties:
-      image: { get_param: image }
-      flavor: { get_param: web_server_flavor }
-      key_name: { get_param: key-name }
+      count: 1
+      resource_def: 
+        type: Rackspace::Cloud::Server
+        properties:
+          name: "dummy_server"
+          image: { get_param: image }
+          flavor: { get_param: web_server_flavor }
+          key_name: { get_param: key-name }
  
 
 # LOAD BALANCER DEFINITIONS #
@@ -183,7 +188,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
+      - addresses: { get_attr: [ dummy_servers, PrivateIP ] }
         port: 80
         condition: ENABLED
       protocol: TCP
@@ -195,7 +200,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
+      - addresses: { get_attr: [ dummy_servers, PrivateIP ] }
         port: 8983
         condition: ENABLED
       protocol: TCP
@@ -207,7 +212,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
+      - addresses: { get_attr: [ dummy_servers, PrivateIP ] }
         port: 80
         condition: ENABLED
       protocol: TCP
