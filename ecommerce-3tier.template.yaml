@@ -207,7 +207,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ web_nodes, PrivateIp ] }
+      - addresses: { get_attr: [ dummy_server, PrivateIp ] }
         port: 80
         condition: ENABLED
       protocol: TCP
