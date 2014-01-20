@@ -169,6 +169,34 @@ parameters:
 # START RESOURCES SECTION ######################################
 resources:
 
+  ext_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 80
+      virtualIps:
+        - {"type": "PUBLIC", "ipVersion": "IPV4"}
+  
+  int_search_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 8983
+      virtualIps:
+        - {"type": "SERVICENET", "ipVersion": "IPV4"}
+
+  int_app_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 80
+      virtualIps:
+        - {"type": "SERVICENET", "ipVersion": "IPV4"}
+
+
 # WEB SERVERS AUTOSCALING GROUP DEFINITION #
   as_group_web_servers:
     type: Rackspace::AutoScale::Group
@@ -198,10 +226,10 @@ resources:
                   iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
-#          loadBalancers:
-#            -
-#              loadBalancerId: { get_resource: ext_lb }
-#              port: 80
+          loadBalancers:
+            -
+              loadBalancerId: { get_resource: ext_lb }
+              port: 80
 
   as_group_web_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
@@ -266,10 +294,10 @@ resources:
                   iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
- #         loadBalancers:
- #          -
- #             loadBalancerId: { get_resource: int_app_lb }
- #             port: 80
+          loadBalancers:
+            -
+              loadBalancerId: { get_resource: int_app_lb }
+              port: 80
 
   as_group_app_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
@@ -335,10 +363,10 @@ resources:
                   iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
-  #        loadBalancers:
-  #          -
-  #            loadBalancerId: { get_resource: int_search_lb }
-  #            port: 8983
+          loadBalancers:
+            -
+              loadBalancerId: { get_resource: int_search_lb }
+              port: 8983
 
   as_group_search_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
@@ -391,14 +419,14 @@ resources:
             systemctl start mysqld.service
                                                                                     
             # Setup MySQL root password and create a user
-            mysqladmin -u root password db_rootpassword
-            cat << EOF | mysql -u root --password=db_rootpassword
-            CREATE DATABASE db_name;
-            GRANT ALL PRIVILEGES ON db_name.* TO "db_user"@"localhost"
-            IDENTIFIED BY "db_password";
-            FLUSH PRIVILEGES;
-            EXIT
-            EOF
+            #mysqladmin -u root password db_rootpassword
+            #cat << EOF | mysql -u root --password=db_rootpassword
+            #CREATE DATABASE db_name;
+            #GRANT ALL PRIVILEGES ON db_name.* TO "db_user"@"localhost"
+            #IDENTIFIED BY "db_password";
+            #FLUSH PRIVILEGES;
+            #EXIT
+            #EOF
           
           params:
             db_rootpassword: { get_param: db_root_password }
@@ -427,9 +455,9 @@ outputs:
   search_decrement_url:
     description: POST to this URL to remove a SEARCH server
     value: {get_attr: [webservers_dec_webhook_01, capabilityUrl]}
-#  public_ip:
-#    description: Public IP of the load balancer
-#    value: {get_attr: [ext_lb, PublicIp]}
+  public_ip:
+    description: Public IP of the load balancer
+    value: {get_attr: [ext_lb, PublicIp]}
   db_ip:
     description: IP Address for the DB server
     value: { get_attr: [master_db, first_address] }
