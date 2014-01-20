@@ -186,7 +186,7 @@ resources:
       protocol: TCP
       port: 8983
       virtualIps:
-        - {"type": "PRIVATE", "ipVersion": "IPV4"}
+        - {"type": "SERVICENET", "ipVersion": "IPV4"}
 
   int_app_lb:
     type: Rackspace::Cloud::LoadBalancer
@@ -195,7 +195,7 @@ resources:
       protocol: TCP
       port: 80
       virtualIps:
-        - {"type": "PRIVATE", "ipVersion": "IPV4"}
+        - {"type": "SERVICENET", "ipVersion": "IPV4"}
 
 # WEB SERVERS AUTOSCALING GROUP DEFINITION #
   as_group_web_servers:
