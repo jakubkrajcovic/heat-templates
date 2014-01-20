@@ -187,7 +187,7 @@ resources:
             name: { get_param: web_server_name }
             key_name: { get_param: key-name }
             imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: 4
+            flavorRef: "4"
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -255,7 +255,7 @@ resources:
             name: { get_param: app_server_name }
             key_name: { get_param: key-name }
             imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: 4
+            flavorRef: "4"
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -324,7 +324,7 @@ resources:
             name: { get_param: search_server_name }
             key_name: { get_param: key-name }
             imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: 4
+            flavorRef: "4"
             metadata: 
               hotness_factor: "100"
             user_data:
