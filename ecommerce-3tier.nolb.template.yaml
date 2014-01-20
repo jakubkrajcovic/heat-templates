@@ -169,32 +169,32 @@ parameters:
 # START RESOURCES SECTION ######################################
 resources:
 
-  ext_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 80
-      virtualIps:
-        - {"type": "PUBLIC", "ipVersion": "IPV4"}
+#  ext_lb:
+#    type: Rackspace::Cloud::LoadBalancer
+#    properties:
+#      nodes: []
+#      protocol: TCP
+#      port: 80
+#      virtualIps:
+#        - {"type": "PUBLIC", "ipVersion": "IPV4"}
   
-  int_search_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 8983
-      virtualIps:
-        - {"type": "SERVICENET", "ipVersion": "IPV4"}
+#  int_search_lb:
+#    type: Rackspace::Cloud::LoadBalancer
+#    properties:
+#      nodes: []
+#      protocol: TCP
+#      port: 8983
+#      virtualIps:
+#        - {"type": "SERVICENET", "ipVersion": "IPV4"}
 
-  int_app_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 80
-      virtualIps:
-        - {"type": "SERVICENET", "ipVersion": "IPV4"}
+#  int_app_lb:
+#    type: Rackspace::Cloud::LoadBalancer
+#    properties:
+#      nodes: []
+#      protocol: TCP
+#      port: 80
+#      virtualIps:
+#        - {"type": "SERVICENET", "ipVersion": "IPV4"}
 
 
 # WEB SERVERS AUTOSCALING GROUP DEFINITION #
@@ -228,7 +228,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: { get_resource: ext_lb }
+              loadBalancerId: 15473
               port: 80
 
   as_group_web_servers_inc_policy_01:
@@ -296,7 +296,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: { get_resource: int_app_lb }
+              loadBalancerId: 15475
               port: 80
 
   as_group_app_servers_inc_policy_01:
@@ -365,7 +365,7 @@ resources:
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: { get_resource: int_search_lb }
+              loadBalancerId: 15477
               port: 8983
 
   as_group_search_servers_inc_policy_01:
