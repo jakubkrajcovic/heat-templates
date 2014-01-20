@@ -165,7 +165,7 @@ parameters:
   ext_lb:
     description: External facing Load Balancer ID. Must already exist
     type: String
-    default: 15437
+    default: 15473
   
   int_search_lb:
     description: Internal load balancer ID to be used for the search cluster. Must already exist
@@ -444,20 +444,20 @@ resources:
             systemctl start mysqld.service
                                                                                     
             # Setup MySQL root password and create a user
-            mysqladmin -u root password db_rootpassword
-            cat << EOF | mysql -u root --password=db_rootpassword
-            CREATE DATABASE db_name;
-            GRANT ALL PRIVILEGES ON db_name.* TO "db_user"@"localhost"
-            IDENTIFIED BY "db_password";
+            mysqladmin -u root password %db_rootpassword%
+            cat << EOF | mysql -u root --password=%db_rootpassword%
+            CREATE DATABASE %db_name%;
+            GRANT ALL PRIVILEGES ON %db_name%.* TO "%db_user%"@"localhost"
+            IDENTIFIED BY "%db_password%";
             FLUSH PRIVILEGES;
             EXIT
             EOF
           
           params:
-            db_rootpassword: "admin"
-            db_name: { get_param: db_name }
-            db_user: { get_param: db_username }
-            db_password: { get_param: db_password } 
+            %db_rootpassword%: "admin"
+            %db_name%: { get_param: db_name }
+            %db_user%: { get_param: db_username }
+            %db_password%: { get_param: db_password } 
 
 
 
