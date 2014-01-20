@@ -19,6 +19,11 @@
             "id": 4,
             "name": "Three tier autoscale-enabled e-commerce platform",
             "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.template"
-        }
+        },
+	{
+	    "id": 5,
+            "name": "Three tier autoscale-enabled e-commerce platform without load balancers",
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.nolb.template"
+	}
     ]
 }

@@ -173,7 +173,7 @@ resources:
   dummy_servers:
     type: OS::Heat::ResourceGroup
     properties:
-      count: 1
+      count: 2
       resource_def: 
         type: OS::Nova::Server
         properties:
@@ -181,6 +181,14 @@ resources:
           image: { get_param: image }
           flavor: { get_param: web_server_flavor }
           key_name: { get_param: key-name }
+          user_data:
+            str_replace:
+              template: |
+                #!/bin/bash
+                iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+                iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
+                iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+                iptables-save > /etc/sysconfig/iptables
  
 
 # LOAD BALANCER DEFINITIONS #
@@ -245,13 +253,10 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
-                  wget -O /etc/yum.repos.d/glusterfs-epel.repo http://download.gluster.org/pub/gluster/glusterfs/3.3/3.3.1/CentOS/glusterfs-epel.repo
-                  yum -y install xfsprogs glusterfs glusterfs-fuse glusterfs-server glusterfs-geo-replication
-                  service glusterd start
-                  chkconfig glusterd on
-                  service iptables stop
-                  cat >>/etc/hosts<<EOF
-                  EOF
+                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_resource: ext_lb }
@@ -316,13 +321,10 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
-                  wget -O /etc/yum.repos.d/glusterfs-epel.repo http://download.gluster.org/pub/gluster/glusterfs/3.3/3.3.1/CentOS/glusterfs-epel.repo
-                  yum -y install xfsprogs glusterfs glusterfs-fuse glusterfs-server glusterfs-geo-replication
-                  service glusterd start
-                  chkconfig glusterd on
-                  service iptables stop
-                  cat >>/etc/hosts<<EOF
-                  EOF
+                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_resource: int_app_lb }
@@ -388,13 +390,10 @@ resources:
               str_replace:
                 template: |
                   #!/bin/bash -v
-                  wget -O /etc/yum.repos.d/glusterfs-epel.repo http://download.gluster.org/pub/gluster/glusterfs/3.3/3.3.1/CentOS/glusterfs-epel.repo
-                  yum -y install xfsprogs glusterfs glusterfs-fuse glusterfs-server glusterfs-geo-replication
-                  service glusterd start
-                  chkconfig glusterd on
-                  service iptables stop
-                  cat >>/etc/hosts<<EOF
-                  EOF
+                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
+                  iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+                  iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
               loadBalancerId: { get_resource: int_search_lb }
