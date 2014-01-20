@@ -183,7 +183,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, first_address] }
+      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
         port: 80
         condition: ENABLED
       protocol: TCP
@@ -195,7 +195,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, second_address ] }
+      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
         port: 8983
         condition: ENABLED
       protocol: TCP
@@ -207,7 +207,7 @@ resources:
     type: Rackspace::Cloud::LoadBalancer
     properties:
       nodes:
-      - addresses: { get_attr: [ dummy_server, second_address ] }
+      - addresses: { get_attr: [ dummy_server, PrivateIP ] }
         port: 80
         condition: ENABLED
       protocol: TCP
