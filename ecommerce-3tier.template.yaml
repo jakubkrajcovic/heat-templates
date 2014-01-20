@@ -182,7 +182,10 @@ resources:
   ext_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: {get_resource: dummy_server}
+      nodes:
+      - addresses: { get_attr: [ dummy_server, PublicIp ] }
+        port: 80
+        condition: ENABLED
       protocol: TCP
       port: 80
       virtualIps:
@@ -191,7 +194,10 @@ resources:
   int_search_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: {get_resource: dummy_server}
+      nodes:
+      - addresses: { get_attr: [ dummy_server, PrivateIp ] }
+        port: 8983
+        condition: ENABLED
       protocol: TCP
       port: 8983
       virtualIps:
@@ -200,7 +206,10 @@ resources:
   int_app_lb:
     type: Rackspace::Cloud::LoadBalancer
     properties:
-      nodes: {get_resource: dummy_server}
+      nodes:
+      - addresses: { get_attr: [ web_nodes, PrivateIp ] }
+        port: 80
+        condition: ENABLED
       protocol: TCP
       port: 80
       virtualIps:
