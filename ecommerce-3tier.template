@@ -170,7 +170,7 @@ parameters:
 resources:
 
 # dummy server to trick load balancers into building:
-  dummy_serve:
+  dummy_server:
     type: OS::Nova::Server
     properties:
       image: { get_param: image }
