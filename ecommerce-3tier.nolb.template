@@ -44,15 +44,6 @@ parameters:
 #      - allowed_pattern: '[a-zA-Z0-9]*'
 #        description: db_password must contain only alphanumeric characters
 
-  imageID:
-    type: String
-    hidden: true
-    default: bced783b-31d2-4637-b820-fa02522c518b
-  flavorID:
-    type: String
-    hidden: true 
-    default: 4
-
   key-name:
     type: String
     required: true
@@ -195,8 +186,8 @@ resources:
           server: 
             name: { get_param: web_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: imageID }
-            flavorRef: { get_param: flavorID }
+            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
+            flavorRef: 4
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -263,8 +254,8 @@ resources:
           server: 
             name: { get_param: app_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: imageID }
-            flavorRef: { get_param: flavorID }
+            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
+            flavorRef: 4
             metadata: 
               hotness_factor: "100"
             user_data:
@@ -332,8 +323,8 @@ resources:
           server: 
             name: { get_param: search_server_name }
             key_name: { get_param: key-name }
-            imageRef: { get_param: imageID }
-            flavorRef: { get_param: flavorID }
+            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
+            flavorRef: 4
             metadata: 
               hotness_factor: "100"
             user_data:
