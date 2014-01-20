@@ -72,75 +72,73 @@ parameters:
   image:
     type: String
     description: Server image id to use
-    default: Scientific Linux 6.4
+    default: bced783b-31d2-4637-b820-fa02522c518b
     constraints:
+# CentOS64, RHEL64, SL64
     - allowed_values:
-      - CentOS 6.4
-      - Red Hat Enterprise Linux 6.4
-      - Scientific Linux 6.4
+      - f70ed7c7-b42e-4d77-83d8-40fa29825b85
+      - c6e2fed0-75bf-420d-a744-7cfc75a1889e
+      - bced783b-31d2-4637-b820-fa02522c518b
       description: USERDATA is made to work with Red Hat flavors and clones
 
   app_server_flavor:
     description: Server flavor for the Application servers
     type: String
-    default: 8GB Standard Instance
+    default: 6
     constraints:
     - allowed_values:
-      - 2GB Standard Instance
-      - 4GB Standard Instance
-      - 8GB Standard Instance
-      - 15GB Standard Instance
-      - 30GB Standard Instance 
-      - 2 GB Performance
-      - 4 GB Performance
-      - 8 GB Performance
-      - 15 GB Performance
-      - 30 GB Performance
-      - 60 GB Performance
-      - 90 GB Performance
-      - 120 GB Performance
+      - 4
+      - 5
+      - 6
+      - 7
+      - performance1-2
+      - performance1-4
+      - performance1-8
+      - performance2-15
+      - performance2-30
+      - performance2-60
+      - performance2-90
+      - performance2-120
       description: must be a valid Rackspace Cloud Server flavor.
 
   web_server_flavor:
     description: Server flavor for the Web servers
     type: String
-    default: 4GB Standard Instance
+    default: 5
     constraints:
     - allowed_values:
-      - 2GB Standard Instance
-      - 4GB Standard Instance
-      - 8GB Standard Instance
-      - 15GB Standard Instance
-      - 30GB Standard Instance 
-      - 2 GB Performance
-      - 4 GB Performance
-      - 8 GB Performance
-      - 15 GB Performance
-      - 30 GB Performance
-      - 60 GB Performance
-      - 90 GB Performance
-      - 120 GB Performance
+      - 4
+      - 5
+      - 6
+      - 7
+      - performance1-2
+      - performance1-4
+      - performance1-8
+      - performance2-15
+      - performance2-30
+      - performance2-60
+      - performance2-90
+      - performance2-120
       description: must be a valid Rackspace Cloud Server flavor.
 
   search_server_flavor:
     description: Server flavor for the Search servers
     type: String
-    default: 2GB Standard Instance
+    default: 4
     constraints:
     - allowed_values:
-      - 2GB Standard Instance
-      - 4GB Standard Instance
-      - 8GB Standard Instance
-      - 15GB Standard Instance
-      - 30GB Standard Instance 
-      - 2 GB Performance
-      - 4 GB Performance
-      - 8 GB Performance
-      - 15 GB Performance
-      - 30 GB Performance
-      - 60 GB Performance
-      - 90 GB Performance
-      - 120 GB Performance
+      - 4
+      - 5
+      - 6
+      - 7
+      - performance1-2
+      - performance1-4
+      - performance1-8
+      - performance2-15
+      - performance2-30
+      - performance2-60
+      - performance2-90
+      - performance2-120
       description: must be a valid Rackspace Cloud Server flavor.
 
   db_server_flavor:
@@ -163,6 +161,22 @@ parameters:
       - 90 GB Performance
       - 120 GB Performance
       description: must be a valid Rackspace Cloud Server flavor.
+
+  ext_lb:
+    description: External facing Load Balancer ID. Must already exist
+    type: String
+    default: 15437
+  
+  int_search_lb:
+    description: Internal load balancer ID to be used for the search cluster. Must already exist
+    type: String
+    default: 15477
+
+  int_app_lb: 
+    description: Internal application load balancer ID. To be used for the application cluster. Must already exist
+    type: String
+    default: 15475
+    
 
 # END PARAMS SECTION ###########################################
 
@@ -214,21 +228,23 @@ resources:
           server: 
             name: { get_param: web_server_name }
             key_name: { get_param: key-name }
-            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: "4"
+            imageRef: { get_param: image }
+            flavorRef: { get_param: web_server_flavor }
             metadata: 
               hotness_factor: "100"
             user_data:
               str_replace:
                 template: |
                   #!/bin/bash -v
+                  yum -y install httpd
+                  chkconfig httpd on
+                  service httpd start
                   iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: "15473"
+              loadBalancerId: { get_param: ext_lb }
               port: 80
 
   as_group_web_servers_inc_policy_01:
@@ -282,22 +298,25 @@ resources:
           server: 
             name: { get_param: app_server_name }
             key_name: { get_param: key-name }
-            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: "4"
+            imageRef: { get_param: image }
+            flavorRef: { get_param: app_server_flavor }
             metadata: 
               hotness_factor: "100"
             user_data:
               str_replace:
                 template: |
                   #!/bin/bash -v
-                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-                  iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
+                  yum -y install java
+                  yum -y install tomcat6 tomcat6-webapps tomcat6-admin-webapps
+                  chkconfig tomcat6 on
+                  service tomcat6 start
+                  iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: "15475"
-              port: 80
+              loadBalancerId: { get_param: int_app_lb }
+              port: 8080
 
   as_group_app_servers_inc_policy_01:
     type: Rackspace::AutoScale::ScalingPolicy
@@ -351,21 +370,25 @@ resources:
           server: 
             name: { get_param: search_server_name }
             key_name: { get_param: key-name }
-            imageRef: f70ed7c7-b42e-4d77-83d8-40fa29825b85
-            flavorRef: "4"
+            imageRef: { get_param: image }
+            flavorRef: { get_param: search_server_flavor }
             metadata: 
               hotness_factor: "100"
             user_data:
               str_replace:
                 template: |
                   #!/bin/bash -v
-                  iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+                  yum -y install java
+                  yum -y install tomcat6 tomcat6-webapps tomcat6-admin-webapps
+                  chkconfig tomcat6 on
+                  service tomcat6 start
+                  iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 8983 -j ACCEPT
                   iptables -I INPUT -p tcp --dport 22 -j ACCEPT
                   iptables-save > /etc/sysconfig/iptables
           loadBalancers:
             -
-              loadBalancerId: "15477"
+              loadBalancerId: { get_param: int_search_lb }
               port: 8983
 
   as_group_search_servers_inc_policy_01:
@@ -406,7 +429,9 @@ resources:
   master_db:
     type: OS::Nova::Server
     properties:
-      image: { get_param: image }
+      name: { get_param: db_server_name }
+      image: Scientific Linux 6.4
+#{ get_param: image }
       flavor: { get_param: db_server_flavor }
       key_name: { get_param: key-name }
       user_data:
@@ -419,20 +444,20 @@ resources:
             systemctl start mysqld.service
                                                                                     
             # Setup MySQL root password and create a user
-            #mysqladmin -u root password db_rootpassword
-            #cat << EOF | mysql -u root --password=db_rootpassword
-            #CREATE DATABASE db_name;
-            #GRANT ALL PRIVILEGES ON db_name.* TO "db_user"@"localhost"
-            #IDENTIFIED BY "db_password";
-            #FLUSH PRIVILEGES;
-            #EXIT
-            #EOF
+            mysqladmin -u root password db_rootpassword
+            cat << EOF | mysql -u root --password=db_rootpassword
+            CREATE DATABASE db_name;
+            GRANT ALL PRIVILEGES ON db_name.* TO "db_user"@"localhost"
+            IDENTIFIED BY "db_password";
+            FLUSH PRIVILEGES;
+            EXIT
+            EOF
           
           params:
-            db_rootpassword: { get_param: db_root_password }
+            db_rootpassword: "admin"
             db_name: { get_param: db_name }
             db_user: { get_param: db_username }
-            db_password: "admin"
+            db_password: { get_param: db_password } 
 
 
 
