@@ -5,33 +5,31 @@ description: |
 
 parameters:
   db_name:
-    type: string
+    type: String
     description: Database name
     default: ecommercedb
     constraints:
       - length: { min: 1, max: 64 }
         description: db_name must be between 1 and 64 characters
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
-        description: >
-          db_name must begin with a letter and contain only alphanumeric
-          characters
+        description:
+          db_name must begin with a letter and contain only alphanumeric characters
   db_username:
-    type: string
+    type: String
     description: The database admin account username
     default: admin
-    hidden: true
+    hidden: false
     constraints:
       - length: { min: 1, max: 16 }
         description: db_username must be between 1 and 64 characters
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
-        description: >
-          db_username must begin with a letter and contain only alphanumeric
-          characters
+        description:
+          db_username must begin with a letter and contain only alphanumeric characters
   db_password:
-    type: string
+    type: String
     description: The database admin account password
     default: admin
-    hidden: true
+    hidden: false
     constraints:
       - length: { min: 1, max: 41 }
         description: db_username must be between 1 and 64 characters
@@ -41,7 +39,7 @@ parameters:
     type: string
     description: Root password for MySQL
     default: admin
-    hidden: true
+    hidden: false
     constraints:
       - length: { min: 1, max: 41 }
         description: db_username must be between 1 and 64 characters
