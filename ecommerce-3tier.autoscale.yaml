@@ -173,6 +173,9 @@ resources:
             config_drive: true
             metadata: 
               hotness_factor: "100"
+            networks:
+              - uuid: "00000000-0000-0000-0000-000000000000"
+              - uuid: "11111111-1111-1111-1111-111111111111"
             user_data:
               str_replace:
                 template: |
@@ -244,6 +247,9 @@ resources:
             config_drive: true
             metadata: 
               hotness_factor: "100"
+            networks:
+                - uuid: "00000000-0000-0000-0000-000000000000"
+                - uuid: "11111111-1111-1111-1111-111111111111"
             user_data:
               str_replace:
                 template: |
@@ -318,6 +324,9 @@ resources:
             config_drive: true
             metadata: 
               hotness_factor: "100"
+            networks:
+              - uuid: "00000000-0000-0000-0000-000000000000"
+              - uuid: "11111111-1111-1111-1111-111111111111"
             user_data:
               str_replace:
                 template: |
