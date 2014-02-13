@@ -5,7 +5,7 @@ description: |
 
 parameters:
   db_name:
-    type: String
+    type: string
     description: Database name
     default: ecommercedb
     constraints:
@@ -14,7 +14,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
         description: db_name must begin with a letter and contain only alphanumeric characters
   db_username:
-    type: String
+    type: string
     description: The database admin account username
     default: admin
     hidden: false
@@ -24,7 +24,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
         description: db_username must begin with a letter and contain only alphanumeric characters
   db_password:
-    type: String
+    type: string
     description: The database admin account password
     default: admin
     hidden: false
@@ -34,7 +34,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z0-9]*'
         description: db_password must contain only alphanumeric characters
 #  db_root_password:
-#    type: String
+#    type: string
 #    description: Root password for MySQL
 #    default: admin
 #    hidden: false
@@ -45,32 +45,32 @@ parameters:
 #        description: db_password must contain only alphanumeric characters
 
   key-name:
-    type: String
+    type: string
     required: true
     description: Name of a nova ssh keypair to use for server access
 
   app_server_name:
     description: Base name for the application servers
-    type: String
+    type: string
     default: app-server
 
   web_server_name:
     description: Base name for the web servers
-    type: String
+    type: string
     default: web-server
 
   search_server_name:
     description: Base name for the search index servers
-    type: String
+    type: string
     default: search-server
 
   db_server_name:
     description: Master database server name
-    type: String
+    type: string
     default: db-server
     
   image:
-    type: String
+    type: string
     description: Server image id to use
     default: Scientific Linux 6.4
     constraints:
@@ -82,7 +82,7 @@ parameters:
 
   app_server_flavor:
     description: Server flavor for the Application servers
-    type: String
+    type: string
     default: 8GB Standard Instance
     constraints:
     - allowed_values:
@@ -103,7 +103,7 @@ parameters:
 
   web_server_flavor:
     description: Server flavor for the Web servers
-    type: String
+    type: string
     default: 4GB Standard Instance
     constraints:
     - allowed_values:
@@ -124,7 +124,7 @@ parameters:
 
   search_server_flavor:
     description: Server flavor for the Search servers
-    type: String
+    type: string
     default: 2GB Standard Instance
     constraints:
     - allowed_values:
@@ -145,7 +145,7 @@ parameters:
 
   db_server_flavor:
     description: Server flavor for the Database servers
-    type: String
+    type: string
     default: 15GB Standard Instance
     constraints:
     - allowed_values:

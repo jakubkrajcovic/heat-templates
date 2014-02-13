@@ -6,11 +6,11 @@ description: |
 parameters:
   
   key-name:
-    type: String
+    type: string
     description: Name of a nova ssh keypair to use for server access
     
   image:
-    type: String
+    type: string
     description: Server image id to use
     default: Ubuntu 12.04 LTS (Precise Pangolin)
     constraints:
@@ -24,7 +24,7 @@ parameters:
       
   flavor:
     description: Server flavor id to use
-    type: String
+    type: string
     default: 1GB Standard Instance
     constraints:
     - allowed_values:

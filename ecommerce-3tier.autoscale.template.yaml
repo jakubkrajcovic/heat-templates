@@ -5,7 +5,7 @@ description: |
 
 parameters:
   db_name:
-    type: String
+    type: string
     description: Database name
     default: ecommercedb
     constraints:
@@ -14,7 +14,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
         description: db_name must begin with a letter and contain only alphanumeric characters
   db_username:
-    type: String
+    type: string
     description: The database admin account username
     default: admin
     hidden: false
@@ -24,7 +24,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z][a-zA-Z0-9]*'
         description: db_username must begin with a letter and contain only alphanumeric characters
   db_password:
-    type: String
+    type: string
     description: The database admin account password
     default: admin
     hidden: true
@@ -34,7 +34,7 @@ parameters:
       - allowed_pattern: '[a-zA-Z0-9]*'
         description: db_password must contain only alphanumeric characters
 #  db_root_password:
-#    type: String
+#    type: string
 #    description: Root password for MySQL
 #    default: admin
 #    hidden: false
@@ -45,32 +45,32 @@ parameters:
 #        description: db_password must contain only alphanumeric characters
 
   key-name:
-    type: String
+    type: string
     required: true
     description: Name of a nova ssh keypair to use for server access
 
   app_server_name:
     description: Base name for the application servers
-    type: String
+    type: string
     default: app-server
 
   web_server_name:
     description: Base name for the web servers
-    type: String
+    type: string
     default: web-server
 
   search_server_name:
     description: Base name for the search index servers
-    type: String
+    type: string
     default: search-server
 
   db_server_name:
     description: Master database server name
-    type: String
+    type: string
     default: db-server
     
   image:
-    type: String
+    type: string
     description: Server image id to use
     default: bced783b-31d2-4637-b820-fa02522c518b
     constraints:
@@ -83,22 +83,22 @@ parameters:
 
   app_server_flavor:
     description: Server flavor for the Application servers
-    type: String
+    type: string
     default: 6
 
   web_server_flavor:
     description: Server flavor for the Web servers
-    type: String
+    type: string
     default: 5
 
   search_server_flavor:
     description: Server flavor for the Search servers
-    type: String
+    type: string
     default: 4
   
   db_server_flavor:
     description: Server flavor for the Database servers
-    type: String
+    type: string
     default: 15GB Standard Instance
     constraints:
     - allowed_values:
@@ -119,17 +119,17 @@ parameters:
 
   ext_lb:
     description: External facing Load Balancer ID. Must already exist
-    type: String
+    type: string
     default: "15473"
   
   int_search_lb:
     description: Internal load balancer ID to be used for the search cluster. Must already exist
-    type: String
+    type: string
     default: "15477"
 
   int_app_lb: 
     description: Internal application load balancer ID. To be used for the application cluster. Must already exist
-    type: String
+    type: string
     default: "15475"
     
 

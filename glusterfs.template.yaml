@@ -5,22 +5,22 @@ description: |
 
 parameters:
   key-name:
-    type: String
+    type: string
     required: true
     description: Name of a nova ssh keypair to use for server access
 
   gluster_server_name:
     description: Base name for the GlusterFS servers
-    type: String
+    type: string
     default: gluster-server
 
   gluster_client_name:
     description: Base name for the GlusterFS clients
-    type: String
+    type: string
     default: gluster-client
     
   image:
-    type: String
+    type: string
     description: Server image id to use
     default: CentOS 6.4
     constraints:
@@ -40,7 +40,7 @@ parameters:
 
   glusterserver_flavor:
     description: Server flavor id to use
-    type: String
+    type: string
     default: 8GB Standard Instance
     constraints:
     - allowed_values:
@@ -61,7 +61,7 @@ parameters:
 
   glusterclient_flavor:
     description: Client flavor id to use
-    type: String
+    type: string
     default: 4GB Standard Instance
     constraints:
     - allowed_values:
