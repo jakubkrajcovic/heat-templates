@@ -185,7 +185,7 @@ resources:
                   service httpd start
           loadBalancers:
             -
-              loadBalancerId: ext_lb
+              loadBalancerId: { get_resource: ext_lb }
               port: 80
 
   as_group_web_servers_inc_policy_01:
@@ -258,7 +258,7 @@ resources:
                   service tomcat6 start
           loadBalancers:
             -
-              loadBalancerId: int_app_lb
+              loadBalancerId: { get_resource: int_app_lb }
               port: 8080
 
   as_group_app_servers_inc_policy_01:
@@ -332,7 +332,7 @@ resources:
                   service tomcat6 start
           loadBalancers:
             -
-              loadBalancerId: int_search_lb
+              loadBalancerId: { get_resource: int_search_lb }
               port: 8983
 
   as_group_search_servers_inc_policy_01:
