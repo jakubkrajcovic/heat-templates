@@ -435,9 +435,6 @@ outputs:
   search_decrement_url:
     description: POST to this URL to remove a SEARCH server
     value: {get_attr: [webservers_dec_webhook_01, capabilityUrl]}
-#  public_ip:
-#    description: Public IP of the load balancer
-#    value: {get_attr: [ext_lb, PublicIp]}
   db_ip:
     description: IP Address for the DB server
     value: { get_attr: [master_db, first_address] }

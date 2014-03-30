@@ -1,0 +1,123 @@
+heat_template_version: 2013-05-23
+
+description: |
+  Demo template for deploying a MongoDB based CMS (Keystone) and a MongoDB based e-commerce application (Forward)
+
+parameters:
+  key-name:
+    type: string
+    description: Name of a nova ssh keypair to use for server access
+
+  cms_server_name:
+    description: Base name for the application servers
+    type: string
+    default: app-server
+
+  ecommerce_server_name:
+    description: Base name for the web servers
+    type: string
+    default: web-server
+
+  search_server_name:
+    description: Base name for the search index servers
+    type: string
+    default: search-server
+
+  image:
+    type: string
+    description: Server image id to use
+    default: c9c7732f-5129-4930-a835-3781255fb1e2
+    constraints:
+# Ubuntu 12.04, Ubuntu 12.10 and 13.10. PVHVM
+    - allowed_values:
+      - c9c7732f-5129-4930-a835-3781255fb1e2
+      - 3dfff025-724f-44d9-af75-f94e7f09eae6
+      - 6110edfe-8589-4bb1-aa27-385f12242627
+      description: Use only Ubuntu based images
+
+  cms_server_flavor:
+    description: Server flavor for the CMS server
+    type: string
+    default: performance1-8
+
+  ecommerce_server_flavor:
+    description: Server flavor for the Ecommerce server
+    type: string
+    default: performance1-8
+
+  search_server_flavor:
+    description: Server flavor for the Search server
+    type: string
+    default: performance1-4
+  
+      
+# END PARAMS SECTION ###########################################
+
+# START RESOURCES SECTION ######################################
+resources:
+
+  cms_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 80
+      virtualIps:
+        - {"type": "PUBLIC", "ipVersion": "IPV4"}
+  
+  ecommerce_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 80
+      virtualIps:
+        - {"type": "PUBLIC", "ipVersion": "IPV4"}
+
+  int_search_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      nodes: []
+      protocol: TCP
+      port: 80
+      virtualIps:
+        - {"type": "SERVICENET", "ipVersion": "IPV4"}
+
+
+  cms_server: 
+    type: "Rackspace::Cloud::Server"
+    properties:
+      flavor: { get_param: cms_server_flavor }
+      image: { get_param: image }
+      name: { get_param: cms_server_name }
+      key_name: { get_param: key-name }
+      user_data: |
+        echo "hello world" > /etc/hello_world
+
+  ecommerce_server: 
+    type: "Rackspace::Cloud::Server"
+    properties:
+      flavor: { get_param: ecommerce_server_flavor }
+      image: { get_param: image }
+      name: { get_param: ecommerce_server_name }
+      key_name: { get_param: key-name }
+      user_data: |
+        echo "hello world" > /etc/hello_world
+
+
+outputs:
+  cms_public_ip:
+    value: { get_attr: [ cms_server, accessIPv4 ] }
+    description: The public ip address of the CMS server
+
+  cms_private_ip:
+    value: { get_attr: [ cms_server, privateIPv4 ] }
+    description: The private ip address of the server
+
+  ecommerce_public_ip:
+    value: { get_attr: [ ecommerce_server, accessIPv4 ] }
+    description: The public ip address of the CMS server
+
+  ecommerce_private_ip:
+    value: { get_attr: [ ecommerce_server, privateIPv4 ] }
+    description: The private ip address of the server
