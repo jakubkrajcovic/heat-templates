@@ -11,12 +11,12 @@ parameters:
   cms_server_name:
     description: Base name for the application servers
     type: string
-    default: app-server
+    default: cms-server
 
   ecommerce_server_name:
     description: Base name for the web servers
     type: string
-    default: web-server
+    default: ecommerce-server
 
   search_server_name:
     description: Base name for the search index servers
@@ -55,34 +55,6 @@ parameters:
 
 # START RESOURCES SECTION ######################################
 resources:
-
-  cms_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 80
-      virtualIps:
-        - {"type": "PUBLIC", "ipVersion": "IPV4"}
-  
-  ecommerce_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 80
-      virtualIps:
-        - {"type": "PUBLIC", "ipVersion": "IPV4"}
-
-  int_search_lb:
-    type: Rackspace::Cloud::LoadBalancer
-    properties:
-      nodes: []
-      protocol: TCP
-      port: 80
-      virtualIps:
-        - {"type": "SERVICENET", "ipVersion": "IPV4"}
-
 
   cms_server: 
     type: "Rackspace::Cloud::Server"
