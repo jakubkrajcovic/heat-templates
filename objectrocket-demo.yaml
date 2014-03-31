@@ -64,6 +64,15 @@ resources:
       name: { get_param: cms_server_name }
       key_name: { get_param: key-name }
       user_data: |
+        apt-get -y install mongodb php5 apache2 unzip php5-dev php5-gd memcached php-pear git
+        pecl install mongo
+        wget http://be993826cb42b92a4717-204141c019a23f5f74ab32ea11a635bb.r23.cf5.rackcdn.com/mongopress.0.2.3.zip
+        unzip mongopress.0.2.3.zip -d /var/www/
+        rm /var/www/index.html
+        git clone https://github.com/objectrocket/rockettop.git
+        mv rockettop/rockettop /usr/local/bin/
+        git clone https://github.com/objectrocket/rocketstat.git
+        mv rocketstat/rocketstat /usr/local/bin/
         echo "hello world" > /etc/hello_world
 
   ecommerce_server: 
@@ -74,6 +83,14 @@ resources:
       name: { get_param: ecommerce_server_name }
       key_name: { get_param: key-name }
       user_data: |
+        apt-get -y install mongodb php5 apache2 unzip php5-dev php5-gd memcached php-pear git
+        pecl install mongo
+        wget http://be993826cb42b92a4717-204141c019a23f5f74ab32ea11a635bb.r23.cf5.rackcdn.com/fwdcommerce-0.1.zip
+        unzip fwdcommerce-0.1.zip -d /var/www/
+        git clone https://github.com/objectrocket/rockettop.git
+        mv rockettop/rockettop /usr/local/bin/
+        git clone https://github.com/objectrocket/rocketstat.git
+        mv rocketstat/rocketstat /usr/local/bin/
         echo "hello world" > /etc/hello_world
 
 
