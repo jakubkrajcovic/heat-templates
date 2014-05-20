@@ -1,24 +1,34 @@
 {
     "templates": [
         {
-            "id": 1,
-            "name": "2-node GlusterFS with 2 clients",
-            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs.yaml"
-        },
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.autoscale.yaml", 
+            "id": 1, 
+            "name": "Demo template for a three tiered environment with a search cluster to host an E-commerce application"
+        }, 
         {
-            "id": 2,
-            "name": "2-node GlusterFS with 2 clients Testing version",
-            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs-test.yaml"
-        },
-    	{
-	    "id": 3,
-            "name": "Three tier autoscale enabled e-commerce platform that builds load balancers as well",
-	    "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.autoscale.yaml"
-	    },
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.nolb.yaml", 
+            "id": 2, 
+            "name": "Demo template for a three tiered environment with a search cluster to host an E-commerce application"
+        }, 
         {
-	    "id": 4,
-            "name": "Builds a demo environment for demoing ObjectRocket with a CMS (Keystone) and an ecommerce platform (Forward)",
-	    "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/objectrocket-demo.yaml"
-	    }
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/ecommerce-3tier.template.yaml", 
+            "id": 3, 
+            "name": "Demo template for a three tiered environment with a search cluster to host an E-commerce application"
+        }, 
+        {
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs-test.yaml", 
+            "id": 4, 
+            "name": "Simple template to deploy Gluster on a cloud server"
+        }, 
+        {
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/glusterfs.yaml", 
+            "id": 5, 
+            "name": "Simple template to deploy a basic GlusterFS environment with 2 bricks and 2 clients"
+        }, 
+        {
+            "url": "https://raw.github.com/jakubkrajcovic/heat-templates/master/objectrocket-demo.yaml", 
+            "id": 6, 
+            "name": "Demo template for deploying a MongoDB based CMS (Keystone) and a MongoDB based e-commerce application (Forward)"
+        }
     ]
 }
